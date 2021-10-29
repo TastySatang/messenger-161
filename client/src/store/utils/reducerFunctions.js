@@ -3,6 +3,7 @@ export const addMessageToStore = (state, payload) => {
   // if sender isn't null, that means the message needs to be put in a brand new convo
   console.log('monki message', message)
   if (sender !== null) {
+    console.log('inside if')
     const newConvo = {
       id: message.conversationId,
       otherUser: sender,
@@ -13,6 +14,7 @@ export const addMessageToStore = (state, payload) => {
   }
 
   return state.map((convo) => {
+    console.log('not inside if')
     if (convo.id === message.conversationId) {
       convo.messages.push(message);
       convo.latestMessageText = message.text;
