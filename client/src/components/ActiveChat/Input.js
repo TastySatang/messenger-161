@@ -35,6 +35,9 @@ const Input = (props) => {
       conversationId: conversationId ? conversationId : null,
       sender: user
     };
+
+    console.log("inside handle submit", reqBody)
+
     await postMessage(reqBody);
     setText("");
   };

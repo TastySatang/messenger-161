@@ -1,7 +1,7 @@
 export const addMessageToStore = (state, payload) => {
   const { message, sender } = payload;
   // if sender isn't null, that means the message needs to be put in a brand new convo
-  console.log(message)
+  console.log('monki message', message)
   if (sender !== null) {
     const newConvo = {
       id: message.conversationId,
