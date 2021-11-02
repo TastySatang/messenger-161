@@ -32,8 +32,8 @@ const Input = (props) => {
     const reqBody = {
       text,
       recipientId: otherUser.id,
-      conversationId: conversationId ? conversationId : null,
-      sender: user
+      conversationId,
+      sender: conversationId ? null : user
     };
 
     console.log("inside handle submit", reqBody)
