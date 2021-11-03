@@ -18,7 +18,7 @@ export const addMessageToStore = (state, payload) => {
     if (convo.id === message.conversationId) {
       console.log('inside not inside if')
       const convoCopy = { ...convo };
-      convoCopy.messages.push(message)
+      convoCopy.messages.unshift(message)
       convoCopy.latestMessageText = message.text;
       return convoCopy;
     } else {
