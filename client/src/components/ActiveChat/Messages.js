@@ -8,9 +8,8 @@ const Messages = (props) => {
 
   return (
     <Box>
-      {messages.map((message) => {
+      {messages.slice(0).reverse().map((message) => {
         const time = moment(message.createdAt).format("h:mm");
-
         return message.senderId === userId ? (
           <SenderBubble key={message.id} text={message.text} time={time} />
         ) : (
