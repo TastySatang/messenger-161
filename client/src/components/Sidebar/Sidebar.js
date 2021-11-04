@@ -24,11 +24,6 @@ const Sidebar = (props) => {
   const { conversations } = props || [];
   const { handleChange, searchTerm } = props;
 
-  useEffect(() => {
-    console.log(props)
-    console.log('conversations print', conversations)
-  }, [conversations, props])
-
   return (
     <Box className={classes.root}>
       <CurrentUser />
