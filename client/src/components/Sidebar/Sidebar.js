@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
 
 const Sidebar = (props) => {
   const classes = useStyles();
-  const conversations = props.conversations || [];
+  const { conversations } = props || [];
   const { handleChange, searchTerm } = props;
 
   return (
@@ -29,8 +29,7 @@ const Sidebar = (props) => {
       <CurrentUser />
       <Typography className={classes.title}>Chats</Typography>
       <Search handleChange={handleChange} />
-      {conversations
-        .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
+      {conversations?.filter((conversation) => conversation.otherUser.username.includes(searchTerm))
         .map((conversation) => {
           return <Chat conversation={conversation} key={conversation.otherUser.username} />;
         })}
