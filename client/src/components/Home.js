@@ -29,6 +29,11 @@ const Home = (props) => {
     fetchConversations();
   }, [fetchConversations]);
 
+  useEffect(() => {
+    console.log(props.conversations)
+    console.log(props.clogstate)
+  }, [props.conversations, props.clogstate])
+
   if (!user.id) {
     // If we were previously logged in, redirect to login instead of register
     if (isLoggedIn) return <Redirect to="/login" />;
@@ -56,6 +61,7 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    clogstate: state,
     user: state.user,
     conversations: state.conversations
   };

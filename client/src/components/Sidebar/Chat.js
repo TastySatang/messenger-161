@@ -26,6 +26,8 @@ const Chat = (props) => {
 
   const handleClick = async (conversation) => {
     await props.setActiveChat(conversation.otherUser.username);
+
+    // implement read here
   };
 
   return (

@@ -73,6 +73,7 @@ router.get("/", async (req, res, next) => {
       convoJSON.latestMessageText = convoJSON.messages[convoJSON.messages.length - 1].text;
       convoJSON.latestMessageTime = convoJSON.messages[convoJSON.messages.length - 1].createdAt;
       conversations[i] = convoJSON;
+      console.log(convoJSON)
     }
 
     conversations.sort((a, b) => b.latestMessageTime - a.latestMessageTime)
@@ -81,5 +82,23 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const conversation = await Conversation.findOne({
+      where: {
+        id: req.params.id,
+      },
+      order: [[Message, "createdAt", "ASC"]],
+      include: [
+        {
+          model: Message,
+        }
+      ]
+    })
+  } catch (error) {
+    next(error);
+  }
+})
 
 module.exports = router;
