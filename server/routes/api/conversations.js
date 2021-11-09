@@ -85,16 +85,16 @@ router.get("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const conversation = await Conversation.findOne({
+    const messages = await Message.update({
       where: {
-        id: req.params.id,
+        conversationId: req.params.id,
+        [Op.not]: [
+          {
+            senderId: req.body
+          },
+        ],
       },
-      order: [[Message, "createdAt", "ASC"]],
-      include: [
-        {
-          model: Message,
-        }
-      ]
+
     })
   } catch (error) {
     next(error);
