@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#9CADC8",
     letterSpacing: -0.17,
   },
+  notiPreviewText: {
+    fontSize: 12,
+    letterSpacing: -0.17,
+    fontWeight: "bold",
+  },
   counter: {
     backgroundColor: '#3A8DFF',
     borderRadius: '999px',
@@ -50,9 +55,19 @@ const ChatContent = (props) => {
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
-        <Typography className={classes.previewText}>
-          {latestMessageText}
-        </Typography>
+
+        {counter ? (
+          <Typography className={classes.notiPreviewText}>
+            {latestMessageText}
+          </Typography>
+        ) : (
+          <Typography className={classes.previewText}>
+            {latestMessageText}
+          </Typography>
+        )}
+
+
+
       </Box>
       {counter ? (
         <Box className={classes.counter}>
