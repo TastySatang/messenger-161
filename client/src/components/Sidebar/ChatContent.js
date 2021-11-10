@@ -26,7 +26,10 @@ const useStyles = makeStyles((theme) => ({
   counter: {
     backgroundColor: '#3A8DFF',
     borderRadius: '999px',
-    color: '#FFF'
+    color: '#FFF',
+    height: '1.5rem',
+    paddingLeft: '0.5rem',
+    paddingRight: '0.5rem',
   }
 }));
 

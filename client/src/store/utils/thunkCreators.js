@@ -119,11 +119,8 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 
 export const readMessages = (payload) => async (dispatch) => {
   try {
-    console.log(payload)
-    const { data } = await axios.put(`/api/conversations/${payload.conversationId}`, payload);
-    console.log('after thunk', data)
+    await axios.put(`/api/conversations/${payload.conversationId}`, payload);
     dispatch(fetchConversations())
-
   } catch (error) {
     console.error(error)
   }
