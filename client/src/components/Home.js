@@ -10,7 +10,8 @@ import { clearOnLogout } from "../store/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh"
+    height: "100vh",
+    fontFamily: "OpenSans"
   }
 }));
 
