@@ -64,12 +64,10 @@ const ChatContent = (props) => {
           {latestMessageText}
         </Typography>
       </Box>
-      {counter ? (
+      {!!counter && (
         <Box className={classes.counter}>
           {counter}
         </Box>
-      ) : (
-        <></>
       )}
 
     </Box>
