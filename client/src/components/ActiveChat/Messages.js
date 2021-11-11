@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Avatar } from "@material-ui/core";
+import { Box, Avatar, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
@@ -20,11 +20,6 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#c2c3c6',
       borderRadius: '16px',
     }
-  },
-  notiBubble: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end'
   },
   avatar: {
     height: '1.5rem',
@@ -49,10 +44,10 @@ const Messages = (props) => {
         let notificationBubble = (<SenderBubble key={message.id} text={message.text} time={time} />)
         if (message.id === lastReadMessageId) {
           notificationBubble = (
-            <Box key={message.id} className={classes.notiBubble}>
+            <Grid key={message.id} container alignItems='flex-end' direction='column'>
               <SenderBubble text={message.text} time={time} />
               <Avatar alt={otherUser.username} src={otherUser.photoUrl} className={classes.avatar}></Avatar>
-            </Box>
+            </Grid>
           )
         }
 
