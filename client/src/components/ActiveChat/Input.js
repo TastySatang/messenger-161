@@ -41,6 +41,7 @@ const Input = (props) => {
   };
 
   const handleClick = async () => {
+    if (!conversationId) return
     const payload = {
       conversationId,
       senderId: otherUser.id
