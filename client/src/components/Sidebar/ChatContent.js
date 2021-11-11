@@ -61,15 +61,9 @@ const ChatContent = (props) => {
           {otherUser.username}
         </Typography>
 
-        {counter ? (
-          <Typography className={classes.notiPreviewText}>
+        <Typography className={counter ? classes.notiPreviewText : classes.previewText}>
             {latestMessageText}
-          </Typography>
-        ) : (
-          <Typography className={classes.previewText}>
-            {latestMessageText}
-          </Typography>
-        )}
+         </Typography>
 
 
 
