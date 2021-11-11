@@ -72,6 +72,19 @@ router.get("/", async (req, res, next) => {
       // set properties for notification count and latest message preview
       convoJSON.latestMessageText = convoJSON.messages[convoJSON.messages.length - 1].text;
       convoJSON.latestMessageTime = convoJSON.messages[convoJSON.messages.length - 1].createdAt;
+
+      const unreadCount = await Message.count({
+        where: {
+          conversationId: convoJSON.id,
+          readByReceiver: false,
+          senderId: {
+            [Op.not]: userId
+          }
+        }
+      })
+
+      convoJSON.unreadCounter = unreadCount
+
       conversations[i] = convoJSON;
     }
 
@@ -90,7 +103,7 @@ router.put("/:id", async (req, res, next) => {
     const conversation = await Conversation.findByPk(req.params.id)
     const userId = req.user.toJSON().id
 
-    if (userId !== conversation.toJSON().user1Id || userId !== conversation.toJSON().user2Id) {
+    if (userId !== conversation.toJSON().user1Id && userId !== conversation.toJSON().user2Id) {
       return res.sendStatus(403)
     }
 

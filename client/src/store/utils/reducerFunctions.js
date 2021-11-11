@@ -8,6 +8,9 @@ export const addMessageToStore = (state, payload) => {
       messages: [message],
     };
     newConvo.latestMessageText = message.text;
+    if (message.socket) {
+      newConvo.unreadCounter = 1
+    }
     return [...state, newConvo];
   }
 
@@ -16,6 +19,9 @@ export const addMessageToStore = (state, payload) => {
       const convoCopy = { ...convo };
       convoCopy.messages.push(message)
       convoCopy.latestMessageText = message.text;
+      if (message.socket) {
+        convoCopy.unreadCounter += 1
+      }
       return convoCopy;
     } else {
       return convo;

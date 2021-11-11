@@ -39,20 +39,7 @@ const ChatContent = (props) => {
   const classes = useStyles();
 
   const { conversation } = props;
-  const { latestMessageText, otherUser } = conversation;
-
-  const unreadMessageCounter = (conversation) => {
-    let count = 0;
-    conversation.messages.forEach((message) => {
-      if (message.senderId === otherUser.id && !message.readByReceiver) {
-        count++
-      }
-    })
-
-    return count
-  }
-
-  const counter = unreadMessageCounter(conversation)
+  const { latestMessageText, otherUser, unreadCounter } = conversation;
 
   return (
     <Box className={classes.root}>
@@ -61,14 +48,14 @@ const ChatContent = (props) => {
           {otherUser.username}
         </Typography>
 
-        <Typography className={counter ? classes.notiPreviewText : classes.previewText}>
+        <Typography className={unreadCounter ? classes.notiPreviewText : classes.previewText}>
           {latestMessageText}
         </Typography>
 
       </Box>
-      {!!counter && (
+      {!!unreadCounter && (
         <Box className={classes.counter}>
-          {counter}
+          {unreadCounter}
         </Box>
       )}
 
