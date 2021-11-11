@@ -1,17 +1,63 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, Avatar } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
 
+const useStyles = makeStyles(() => ({
+  root: {
+    maxHeight: '75vh',
+    overflowY: 'scroll',
+    scrollMargin: '10px',
+    paddingRight: '1rem',
+    '&::-webkit-scrollbar': {
+      width: '6px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: '#f4f6fa'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#c2c3c6',
+      borderRadius: '16px',
+    }
+  },
+  notiBubble: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end'
+  },
+  avatar: {
+    height: '1.5rem',
+    width: '1.5rem',
+    marginTop: '.5rem'
+  }
+}));
+
 const Messages = (props) => {
+  const classes = useStyles();
   const { messages, otherUser, userId } = props;
 
+  const myMessages = messages.filter((message) => message.senderId === userId && message.readByReceiver)
+  const lastReadMessageId = myMessages[myMessages.length - 1]?.id
+
   return (
-    <Box>
+    <Box className={classes.root}>
       {messages.map((message) => {
+
         const time = moment(message.createdAt).format("h:mm");
+
+        let notificationBubble = (<SenderBubble key={message.id} text={message.text} time={time} />)
+        if (message.id === lastReadMessageId) {
+          notificationBubble = (
+            <Box key={message.id} className={classes.notiBubble}>
+              <SenderBubble text={message.text} time={time} />
+              <Avatar alt={otherUser.username} src={otherUser.photoUrl} className={classes.avatar}></Avatar>
+            </Box>
+          )
+        }
+
         return message.senderId === userId ? (
-          <SenderBubble key={message.id} text={message.text} time={time} />
+          notificationBubble
         ) : (
           <OtherUserBubble key={message.id} text={message.text} time={time} otherUser={otherUser} />
         );

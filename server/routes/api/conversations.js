@@ -82,4 +82,23 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const messages = await Message.update(
+      {
+        readByReceiver: true
+      },
+      {
+        where: {
+          conversationId: req.params.id,
+          senderId: req.body.senderId
+        },
+      })
+
+    await res.json(messages);
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;

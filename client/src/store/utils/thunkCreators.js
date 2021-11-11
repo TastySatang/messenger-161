@@ -115,3 +115,13 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
     console.error(error);
   }
 };
+
+
+export const readMessages = (payload) => async (dispatch) => {
+  try {
+    await axios.put(`/api/conversations/${payload.conversationId}`, payload);
+    dispatch(fetchConversations())
+  } catch (error) {
+    console.error(error)
+  }
+}

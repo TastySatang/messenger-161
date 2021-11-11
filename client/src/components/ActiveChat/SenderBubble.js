@@ -23,7 +23,9 @@ const useStyles = makeStyles(() => ({
   },
   bubble: {
     background: "#F4F6FA",
-    borderRadius: "10px 10px 0 10px"
+    borderRadius: "10px 10px 0 10px",
+    wordBreak: 'break-word',
+    maxWidth: '20rem'
   }
 }));
 
@@ -36,6 +38,7 @@ const SenderBubble = (props) => {
       <Box className={classes.bubble}>
         <Typography className={classes.text}>{text}</Typography>
       </Box>
+
     </Box>
   );
 };
