@@ -38,12 +38,12 @@ const Messages = (props) => {
   const { messages, otherUser, userId } = props;
 
   const myMessages = messages.filter((message) => message.senderId === userId && message.readByReceiver)
-  const lastReadMessageId = myMessages[myMessages.length - 1].id
+  const lastReadMessageId = myMessages[myMessages.length - 1]?.id
 
   return (
     <Box className={classes.root}>
       {messages.map((message) => {
-        console.log('min',)
+
         const time = moment(message.createdAt).format("h:mm");
 
         let notificationBubble = (<SenderBubble key={message.id} text={message.text} time={time} />)

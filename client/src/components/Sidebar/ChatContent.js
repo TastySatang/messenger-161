@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
   notiPreviewText: {
     fontSize: 12,
     letterSpacing: -0.17,
+    maxWidth: '6.5rem',
     fontWeight: "bold",
+    overflowX: 'hidden',
   },
   counter: {
     backgroundColor: '#3A8DFF',
