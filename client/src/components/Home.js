@@ -11,7 +11,6 @@ import { clearOnLogout } from "../store/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-    fontFamily: "OpenSans"
   }
 }));
 
@@ -30,10 +29,6 @@ const Home = (props) => {
     fetchConversations();
   }, [fetchConversations]);
 
-  useEffect(() => {
-    console.log(props.conversations)
-    console.log(props.clogstate)
-  }, [props.conversations, props.clogstate])
 
   if (!user.id) {
     // If we were previously logged in, redirect to login instead of register
