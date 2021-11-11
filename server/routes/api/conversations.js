@@ -84,6 +84,16 @@ router.get("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+    const conversation = await Conversation.findByPk(req.params.id)
+    const userId = req.user.toJSON().id
+
+    if (userId !== conversation.toJSON().user1Id || userId !== conversation.toJSON().user2Id) {
+      return res.sendStatus(403)
+    }
+
     const messages = await Message.update(
       {
         readByReceiver: true
