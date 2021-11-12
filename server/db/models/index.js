@@ -6,19 +6,14 @@ const Receiver = require("./receivers");
 
 // associations
 
-User.hasMany(Conversation);
+User.belongsToMany(Conversation, { through: Partaker });
+Conversation.belongsToMany(User, { through: Partaker })
 Conversation.belongsTo(User, { as: "user1" });
 Conversation.belongsTo(User, { as: "user2" });
 Message.belongsTo(Conversation);
 Conversation.hasMany(Message);
-User.hasMany(Partaker);
-Partaker.belongsTo(User);
-Partaker.belongsTo(Conversation);
-Conversation.hasMany(Partaker)
-User.hasMany(Receiver);
-Receiver.belongsTo(User);
-Receiver.belongsTo(Message);
-Message.hasMany(Receiver)
+User.belongsToMany(Message, { through: Receiver });
+Message.belongsToMany(User, { through: Receiver })
 
 module.exports = {
   User,
