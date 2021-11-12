@@ -10,7 +10,7 @@ import { clearOnLogout } from "../store/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh"
+    height: "100vh",
   }
 }));
 
@@ -28,6 +28,7 @@ const Home = (props) => {
   useEffect(() => {
     fetchConversations();
   }, [fetchConversations]);
+
 
   if (!user.id) {
     // If we were previously logged in, redirect to login instead of register
@@ -56,6 +57,7 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    clogstate: state,
     user: state.user,
     conversations: state.conversations
   };

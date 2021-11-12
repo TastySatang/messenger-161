@@ -2,6 +2,7 @@ import React from "react";
 import { Box } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
+import { readMessages } from "../../store/utils/thunkCreators";
 import { setActiveChat } from "../../store/activeConversation";
 import { connect } from "react-redux";
 
@@ -26,6 +27,14 @@ const Chat = (props) => {
 
   const handleClick = async (conversation) => {
     await props.setActiveChat(conversation.otherUser.username);
+
+    if (!conversation.id) return
+    const payload = {
+      conversationId: conversation.id,
+      senderId: conversation.otherUser.id
+    }
+    await props.readMessages(payload)
+
   };
 
   return (
@@ -45,6 +54,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setActiveChat: (id) => {
       dispatch(setActiveChat(id));
+    },
+    readMessages: (payload) => {
+      dispatch(readMessages(payload))
     }
   };
 };
