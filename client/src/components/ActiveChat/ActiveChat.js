@@ -36,6 +36,7 @@ const ActiveChat = (props) => {
           <Box className={classes.chatContainer}>
             <Messages
               messages={conversation.messages}
+              lastMessageReadId={conversation.lastMessageReadId}
               otherUser={conversation.otherUser}
               userId={user.id}
             />
