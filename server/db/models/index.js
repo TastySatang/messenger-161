@@ -14,6 +14,7 @@ Conversation.hasMany(Message);
 User.hasMany(Partaker);
 Partaker.belongsTo(User);
 Partaker.belongsTo(Conversation);
+Conversation.hasMany(Partaker)
 User.hasMany(Receiver);
 Receiver.belongsTo(User);
 Receiver.belongsTo(Message);
