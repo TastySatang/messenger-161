@@ -2,6 +2,7 @@ import axios from "axios";
 import socket from "../../socket";
 import {
   gotConversations,
+  gotOneConvo,
   addConversation,
   setNewMessage,
   setSearchedUsers,
@@ -78,6 +79,15 @@ export const fetchConversations = () => async (dispatch) => {
   }
 };
 
+export const fetchOneConversation = (conversationId) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/conversations/${conversationId}`);
+    dispatch(gotOneConvo(data));
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 const saveMessage = async (body) => {
   const { data } = await axios.post("/api/messages", body);
   return data;
@@ -120,7 +130,7 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 export const readMessages = (payload) => async (dispatch) => {
   try {
     await axios.put(`/api/conversations/${payload.conversationId}`, payload);
-    dispatch(fetchConversations())
+    dispatch(fetchOneConversation(payload.conversationId))
   } catch (error) {
     console.error(error)
   }
