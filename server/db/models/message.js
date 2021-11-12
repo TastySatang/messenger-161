@@ -10,6 +10,7 @@ const Message = db.define("message", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  // Remove this column after reworking to use receivers table instead.
   readByReceiver: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
