@@ -34,6 +34,7 @@ const Chat = (props) => {
       senderId: conversation.otherUser.id
     }
     await props.readMessages(payload)
+
   };
 
   return (

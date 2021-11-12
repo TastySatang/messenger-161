@@ -1,5 +1,6 @@
 import {
   addNewConvoToStore,
+  updateConversation,
   addOnlineUserToStore,
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
@@ -9,6 +10,7 @@ import {
 // ACTIONS
 
 const GET_CONVERSATIONS = "GET_CONVERSATIONS";
+const GOT_ONE_CONVO = "GOT_ONE_CONVO"
 const SET_MESSAGE = "SET_MESSAGE";
 const ADD_ONLINE_USER = "ADD_ONLINE_USER";
 const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
@@ -24,6 +26,13 @@ export const gotConversations = (conversations) => {
     conversations,
   };
 };
+
+export const gotOneConvo = (conversation) => {
+  return {
+    type: GOT_ONE_CONVO,
+    conversation,
+  }
+}
 
 export const setNewMessage = (message, sender) => {
   return {
@@ -73,6 +82,8 @@ const reducer = (state = [], action) => {
   switch (action.type) {
     case GET_CONVERSATIONS:
       return action.conversations;
+    case GOT_ONE_CONVO:
+      return updateConversation(state, action.conversation)
     case SET_MESSAGE:
       return addMessageToStore(state, action.payload);
     case ADD_ONLINE_USER: {
