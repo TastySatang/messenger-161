@@ -30,10 +30,7 @@ const useStyles = makeStyles(() => ({
 
 const Messages = (props) => {
   const classes = useStyles();
-  const { messages, otherUser, userId } = props;
-
-  const myMessages = messages.filter((message) => message.senderId === userId && message.readByReceiver)
-  const lastReadMessageId = myMessages[myMessages.length - 1]?.id
+  const { messages, otherUser, userId, lastMessageReadId } = props;
 
   return (
     <Box className={classes.root}>
@@ -42,7 +39,7 @@ const Messages = (props) => {
         const time = moment(message.createdAt).format("h:mm");
 
         let notificationBubble = (<SenderBubble key={message.id} text={message.text} time={time} />)
-        if (message.id === lastReadMessageId) {
+        if (message.id === lastMessageReadId) {
           notificationBubble = (
             <Grid key={message.id} container alignItems='flex-end' direction='column'>
               <SenderBubble text={message.text} time={time} />

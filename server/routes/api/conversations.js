@@ -83,7 +83,17 @@ router.get("/", async (req, res, next) => {
         }
       })
 
+      const lastReadMessageId = await Message.max('id', {
+        where: {
+          conversationId: convoJSON.id,
+          readByReceiver: true,
+          senderId: userId,
+
+        }
+      })
+
       convoJSON.unreadCounter = unreadCount
+      convoJSON.lastMessageReadId = lastReadMessageId
 
       conversations[i] = convoJSON;
     }
